@@ -1,0 +1,137 @@
+
+:root {
+    --primary: #173B30;
+    --primary-hover: #245746;
+    --accent: #9BCB9E;
+    --background: #F5F7F5;
+    --surface: #FFFFFF;
+    --text: #263B32;
+    --text-secondary: #7C8981;
+    --border: #E1E7E2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.header {
+    min-height: 80px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 5%;
+    gap: 25px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.logo-icono {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.logo-texto h2 {
+    font-size: 21px;
+}
+
+.logo-texto span {
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    color: var(--primary-hover);
+}
+
+.nav .nav-admin {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.header-acciones {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.carrito-icono {
+    color: var(--primary);
+    font-size: 21px;
+}
+
+.btn-login,
+.btn-logout {
+    text-decoration: none;
+    padding: 11px 17px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.btn-login {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-logout {
+    border: 1px solid var(--border);
+    color: var(--primary);
+}
+
+.usuario-rol {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav {
+        gap: 16px;
+    }
+
+    .header-acciones {
+        justify-content: flex-end;
+    }
+}
