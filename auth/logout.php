@@ -13,6 +13,6 @@ unset(
 
 session_regenerate_id(true);
 
-header("Location: /inventech2/index.php");
+header("Location: /inventechSolutions/index.php");
 exit();
 ?>

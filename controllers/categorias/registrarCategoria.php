@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" &&
-    isset($_POST["btnInsertar"])) {
+    isset($_POST["btnInsertarCategoria"])) {
 
     $Nombre = trim($_POST["Nombre"] ?? "");
     $Descripcion = trim($_POST["Descripcion"] ?? "");

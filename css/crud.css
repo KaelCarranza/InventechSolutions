@@ -1,0 +1,530 @@
+/* =====================================
+   VARIABLES
+===================================== */
+
+:root {
+    --crud-primary: #173b30;
+    --crud-primary-hover: #245746;
+    --crud-surface: #ffffff;
+    --crud-text: #1e293b;
+    --crud-muted: #64748b;
+    --crud-border: #e2e8f0;
+    --crud-danger: #dc3545;
+}
+
+
+/* =====================================
+   CONTENEDORES
+===================================== */
+
+.crud-card {
+    background: var(--crud-surface);
+
+    border: 1px solid var(--crud-border);
+    border-radius: 14px;
+
+    padding: 24px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.025);
+}
+
+
+/* =====================================
+   ENCABEZADOS
+===================================== */
+
+.crud-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.crud-card-header h5 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--crud-text);
+
+    margin: 0 0 5px;
+}
+
+.crud-card-header p {
+    color: var(--crud-muted);
+    font-size: 13px;
+
+    margin: 0;
+}
+
+.crud-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e1ede6;
+    color: var(--crud-primary);
+
+    border-radius: 11px;
+    font-size: 19px;
+}
+
+
+/* =====================================
+   FORMULARIOS
+===================================== */
+
+.crud-card .form-label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.crud-card .form-control,
+.crud-card .form-select {
+    min-height: 44px;
+
+    border: 1px solid #dce3e9;
+    border-radius: 8px;
+
+    padding: 10px 12px;
+
+    font-size: 14px;
+}
+
+.crud-card .form-control:focus,
+.crud-card .form-select:focus {
+    border-color: #9bcb9e;
+    box-shadow: 0 0 0 3px rgba(23, 59, 48, 0.08);
+}
+
+.crud-card .form-control::placeholder {
+    color: #94a3b8;
+}
+
+.crud-card textarea {
+    resize: vertical;
+}
+
+.crud-card .form-text {
+    font-size: 12px;
+    color: var(--crud-muted);
+}
+
+
+/* =====================================
+   BOTÓN REGISTRAR
+===================================== */
+
+.btn-registrar {
+    background: var(--crud-primary);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 12px 16px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: background 0.2s ease;
+}
+
+.btn-registrar:hover,
+.btn-registrar:focus {
+    background: var(--crud-primary-hover);
+    color: #ffffff;
+}
+
+
+/* =====================================
+   TABLAS
+===================================== */
+
+.crud-table {
+    font-size: 14px;
+}
+
+.crud-table thead th {
+    background: #f5f7f9;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    padding: 15px 12px;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--crud-border);
+}
+
+.crud-table tbody td {
+    padding: 16px 12px;
+
+    color: #334155;
+
+    border-bottom: 1px solid #edf0f3;
+}
+
+.crud-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.crud-table {
+    --bs-table-hover-bg: #f8fafc;
+}
+
+
+/* =====================================
+   IMÁGENES DE PRODUCTOS
+===================================== */
+
+.producto-imagen {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+
+    padding: 5px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--crud-border);
+    border-radius: 10px;
+}
+
+.producto-sin-imagen {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+    color: #94a3b8;
+
+    border-radius: 10px;
+
+    font-size: 22px;
+}
+
+
+/* =====================================
+   PRECIO
+===================================== */
+
+.precio-producto {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   CANTIDAD / STOCK
+===================================== */
+
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 38px;
+
+    padding: 5px 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stock-disponible {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.stock-agotado {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =====================================
+   DESCRIPCIONES
+===================================== */
+
+.descripcion-producto,
+.descripcion-categoria {
+    min-width: 160px;
+    max-width: 260px;
+
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   CATEGORÍAS
+===================================== */
+
+.categoria-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.categoria-icono {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e1ede6;
+    color: var(--crud-primary);
+
+    border-radius: 9px;
+}
+
+
+/* =====================================
+   ACCIONES
+===================================== */
+
+.crud-acciones {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accion-btn {
+    width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid var(--crud-border);
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Editar */
+
+.accion-editar {
+    color: #475569;
+}
+
+.accion-editar:hover {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #2563eb;
+}
+
+
+/* Eliminar */
+
+.accion-eliminar {
+    color: var(--crud-danger);
+}
+
+.accion-eliminar:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.accion-btn:focus-visible {
+    outline: 3px solid #9bcb9e;
+    outline-offset: 2px;
+}
+
+
+/* =====================================
+   ALERTAS
+===================================== */
+
+.alert {
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 1200px) {
+
+    .crud-card {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .crud-card {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .crud-card-header h5 {
+        font-size: 16px;
+    }
+
+    .crud-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+}
+
+/* Botón deshabilitar usuario */
+
+.accion-deshabilitar {
+    color: #d97706;
+}
+
+.accion-deshabilitar:hover {
+    background: #fff7ed;
+    border-color: #fed7aa;
+    color: #b45309;
+}
+
+
+/* Botón habilitar usuario */
+
+.accion-habilitar {
+    color: #198754;
+}
+
+.accion-habilitar:hover {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+/* Total Productops */
+.resumen-total {
+    background: green;
+    color: #ffffff;
+}
+
+/* Stock bajo */
+.resumen-stock-bajo, .resumen-admin  {
+    background: orange;
+    color: #ffffff;
+}
+
+/* Productos agotados */
+.resumen-agotados, .resumen-cliente {
+    background: red;
+    color: #ffffff;
+}
+
+/* SKU del producto */
+
+.sku-producto {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Imagen del modal de edición */
+
+.imagen-editar-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    min-height: 150px;
+    padding: 12px;
+}
+
+.imagen-editar {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+}
+
+/* Modal de productos */
+
+.modal-content {
+    border: none;
+    border-radius: 14px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 20px 24px;
+}
+
+.modal-title {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+/* Contenedor de la imagen actual */
+.imagen-editar-contenedor {
+    width: 100%;
+    height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Imagen del producto */
+.imagen-editar-contenedor .imagen-editar {
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 130px;
+
+    object-fit: contain;
+    display: block;
+}

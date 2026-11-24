@@ -1,0 +1,441 @@
+/* ===================================
+   VARIABLES
+=================================== */
+
+:root {
+    --sidebar-width: 260px;
+    --sidebar-bg: #173b30;
+    --sidebar-hover: #245746;
+    --sidebar-active: #30634f;
+    --sidebar-text: #e5efe9;
+    --sidebar-muted: #9bb7a9;
+    --admin-bg: #f5f7f5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--admin-bg);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ===================================
+   BARRA LATERAL
+=================================== */
+
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+    height: 100dvh;
+
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 16px;
+
+    z-index: 1030;
+
+    transition: transform 0.25s ease;
+}
+
+
+/* ===================================
+   MARCA
+=================================== */
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 8px 12px;
+
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.sidebar-brand:hover {
+    color: #ffffff;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text strong {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.brand-text small {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--sidebar-muted);
+
+    margin-top: 5px;
+}
+
+
+/* ===================================
+   DIVISORES
+=================================== */
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+
+    margin: 16px 0;
+}
+
+
+/* ===================================
+   MENÚ
+=================================== */
+
+.sidebar-menu {
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #44705e transparent;
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    margin-bottom: 24px;
+}
+
+.menu-title {
+    padding: 0 12px;
+    margin-bottom: 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+    color: var(--sidebar-muted);
+}
+
+
+/* ===================================
+   OPCIONES DEL MENÚ
+=================================== */
+
+.menu-link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 12px 14px;
+
+    color: var(--sidebar-text);
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    border: none;
+    border-radius: 8px;
+
+    transition: background 0.2s ease,
+                color 0.2s ease;
+}
+
+.menu-link i {
+    width: 21px;
+    min-width: 21px;
+
+    font-size: 16px;
+    text-align: center;
+
+    color: #b7cec0;
+}
+
+.menu-link:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+}
+
+
+/* Opción seleccionada */
+
+.menu-link.active {
+    background: var(--sidebar-active);
+    color: #ffffff;
+
+    font-weight: 600;
+
+    border: none;
+    box-shadow: none;
+}
+
+.menu-link.active i {
+    color: #ffffff;
+}
+
+
+/* Eliminar completamente la línea lateral */
+
+.admin-sidebar .menu-link.active::before,
+.admin-sidebar .menu-link.active::after {
+    content: none !important;
+    display: none !important;
+}
+
+
+/* ===================================
+   PERFIL ADMINISTRADOR
+=================================== */
+
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 4px 8px 16px;
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-info strong {
+    font-size: 13px;
+    color: #ffffff;
+}
+
+.admin-info small {
+    font-size: 11px;
+    color: var(--sidebar-muted);
+}
+
+.tienda-link {
+    color: #c6d9ce;
+}
+
+
+/* ===================================
+   CONTENIDO PRINCIPAL
+=================================== */
+
+.admin-content {
+    margin-left: var(--sidebar-width);
+
+    min-height: 100vh;
+
+    transition: margin-left 0.25s ease;
+}
+
+
+/* ===================================
+   BARRA SUPERIOR
+=================================== */
+
+.admin-topbar {
+    position: sticky;
+    top: 0;
+
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 28px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+
+    z-index: 1020;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topbar-title {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 14px;
+    color: #475569;
+}
+
+.topbar-user i {
+    font-size: 24px;
+    color: var(--sidebar-bg);
+}
+
+
+/* ===================================
+   CONTENIDO DE LAS PÁGINAS
+=================================== */
+
+.admin-main {
+    padding: 32px;
+}
+
+.admin-main h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+
+    margin-bottom: 10px;
+}
+
+.admin-description {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.bienvenida-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    padding: 30px;
+
+    margin-top: 28px;
+}
+
+.bienvenida-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e1ede6;
+    color: #173b30;
+
+    border-radius: 12px;
+    font-size: 24px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ===================================
+   OVERLAY
+=================================== */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    z-index: 1025;
+}
+
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media (max-width: 768px) {
+
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-content {
+        margin-left: 0;
+    }
+
+    body.sidebar-open .admin-sidebar {
+        transform: translateX(0);
+    }
+
+    body.sidebar-open .sidebar-overlay {
+        display: block;
+    }
+
+    .admin-topbar {
+        padding: 12px 16px;
+    }
+
+    .admin-main {
+        padding: 20px 16px;
+    }
+
+    .admin-main h1 {
+        font-size: 24px;
+    }
+
+    .topbar-user span {
+        display: none;
+    }
+
+}

@@ -51,7 +51,7 @@ $esAdministrador = (
 
         <?php if ($esAdministrador): ?>
 
-            <a href="admin/index.php"
+            <a href="admin/usuarios.php"
                class="nav-admin">
                 <i class="fa-solid fa-user-shield"></i>
                 Administración
@@ -69,7 +69,7 @@ $esAdministrador = (
 
         <?php if (!$logueado): ?>
 
-            <a href="/inventech2/auth/login.php" class="btn-login">
+            <a href="/inventechSolutions/auth/login.php" class="btn-login">
                 Iniciar sesión
             </a>
 
@@ -80,7 +80,7 @@ $esAdministrador = (
                 <?= htmlspecialchars($rol) ?>
             </span>
 
-            <a href="/inventech2/auth/logout.php" class="btn-logout">
+            <a href="/inventechSolutions/auth/logout.php" class="btn-logout">
                 Cerrar sesión
             </a>
 
