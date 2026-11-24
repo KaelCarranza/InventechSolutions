@@ -1,0 +1,301 @@
+@import url("paleta.css");
+
+/* PALETA DE COLORES INVENTECH */
+:root {
+    --primary: var(--it-primary);
+    --primary-hover: var(--it-primary-hover);
+    --accent: var(--it-accent);
+
+    --auth-background: var(--it-auth-background);
+
+    --surface: var(--it-surface);
+
+    --text: var(--it-text);
+    --text-secondary: var(--it-placeholder);
+
+    --border: var(--it-border);
+}
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--auth-background);
+    color: var(--text);
+
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* CONTENEDOR DEL LOGIN Y REGISTRO */
+.contenedor {
+    background: var(--surface);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    box-shadow: 0 8px 30px rgba(23, 59, 48, 0.06);
+}
+
+/* TÍTULOS */
+.contenedor h1 {
+    color: var(--primary);
+    font-size: 27px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.contenedor h2 {
+    color: var(--text);
+    font-size: 21px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* FORMULARIOS */
+.contenedor form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contenedor input {
+    width: 100%;
+    padding: 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: var(--it-surface);
+    color: var(--text);
+
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.contenedor input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--it-focus-shadow);
+}
+
+/* BOTONES */
+.contenedor button {
+    padding: 14px;
+
+    background: var(--primary);
+    color: var(--it-surface);
+
+    font-size: 15px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 30px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.contenedor button:hover {
+    background: var(--primary-hover);
+}
+
+/* ENLACES */
+.contenedor a {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.contenedor a:hover {
+    color: var(--primary-hover);
+}
+
+/* MENSAJES */
+.contenedor p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .contenedor {
+        padding: 28px 22px;
+    }
+}
+
+.logout {
+    color: var(--it-danger);
+}
+
+/* LOGO */
+.login-logo {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 20px;
+
+    background: var(--primary);
+    color: var(--it-surface);
+
+    border-radius: 15px;
+    font-size: 27px;
+}
+
+/* MENSAJE DE BIENVENIDA */
+.bienvenida {
+    margin-top: -12px;
+    margin-bottom: 25px;
+
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* CAMPOS DEL FORMULARIO */
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-formulario label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.campo-formulario input {
+    padding: 14px;
+}
+
+/* MENSAJES DEL LOGIN */
+.mensaje {
+    background: var(--it-danger-pale);
+    color: var(--it-danger-text);
+
+    border: 1px solid var(--it-danger-border);
+    border-radius: 8px;
+
+    padding: 12px;
+    margin-bottom: 18px;
+
+    font-size: 13px;
+}
+
+/* BOTÓN INGRESAR */
+.contenedor button[type="submit"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* PIE DEL FORMULARIO */
+.login-footer {
+    border-top: 1px solid var(--border);
+
+    margin-top: 25px;
+    padding-top: 10px;
+
+    text-align: center;
+}
+
+/* VOLVER A LA TIENDA */
+.volver-tienda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 20px;
+
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.volver-tienda:hover {
+    color: var(--primary);
+}
+
+/* AYUDA DE LOS CAMPOS */
+.campo-ayuda {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* CONTENEDOR DE CONTRASEÑA */
+.password-contenedor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.contenedor .password-contenedor input {
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 45px;
+}
+
+/* BOTÓN MOSTRAR CONTRASEÑA */
+.contenedor .btn-password {
+    position: absolute;
+    right: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    color: var(--text-secondary);
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.contenedor .btn-password:hover {
+    background: transparent;
+    color: var(--primary);
+}
+
+.contenedor button[type="submit"] {
+    background: var(--it-accent);
+    color: var(--it-primary);
+}
+
+.contenedor button[type="submit"]:hover {
+    background: var(--it-primary-active);
+    color: var(--it-surface);
+}
+
+.login-logo {
+    background: var(--it-primary);
+    color: var(--it-accent);
+}

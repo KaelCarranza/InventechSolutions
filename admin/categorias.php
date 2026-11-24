@@ -22,9 +22,9 @@ $totalCategorias = count($categorias);
     <title>Gestión de categorías | InvenTech Solutions</title>
     <script src="https://kit.fontawesome.com/4b21b27482.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/sidebar.css?v=1.0">
-    <link rel="stylesheet" href="../css/usuarios.css">
-    <link rel="stylesheet" href="../css/crud.css">
+    <link rel="stylesheet" href="../css/sidebar.css?v=2.0">
+    <link rel="stylesheet" href="../css/usuarios.css?v=2.0">
+    <link rel="stylesheet" href="../css/crud.css?v=2.0">
 </head>
 
 <body>

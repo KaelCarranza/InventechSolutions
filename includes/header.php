@@ -33,17 +33,17 @@ $esAdministrador = (
             Inicio
         </a>
 
-        <a href="index.php#productos">
+        <a href="">
             Productos
         </a>
 
-        <a href="proformas.php">
+        <a href="">
             Proformas
         </a>
 
         <?php if ($logueado): ?>
 
-            <a href="pedidos.php">
+            <a href="">
                 Mis pedidos
             </a>
 
@@ -74,11 +74,6 @@ $esAdministrador = (
             </a>
 
         <?php else: ?>
-
-            <span class="usuario-rol">
-                <i class="fa-solid fa-user"></i>
-                <?= htmlspecialchars($rol) ?>
-            </span>
 
             <a href="/inventechSolutions/auth/logout.php" class="btn-logout">
                 Cerrar sesión

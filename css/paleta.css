@@ -1,0 +1,74 @@
+/* PALETA CENTRAL INVENTECH SOLUTIONS */
+
+:root {
+
+    /* COLORES PRINCIPALES */
+    --it-primary: #181818;
+    --it-primary-hover: #262626;
+    --it-primary-active: #C2410C;
+    --it-accent: #F97316;
+
+    /* FONDOS */
+    --it-background: #F4F4F5;
+    --it-surface: #FFFFFF;
+
+    /* TEXTOS */
+    --it-text: #27272A;
+    --it-text-secondary: #52525B;
+    --it-placeholder: #71717A;
+
+    /* BORDES */
+    --it-border: #E4E4E7;
+
+    /* HEADER Y SIDEBAR */
+    --it-header-text: #E4E4E7;
+    --it-header-muted: #A1A1AA;
+    --it-header-icon: #D4D4D8;
+
+    /* COLORES SUAVES */
+    --it-soft: #FFEDD5;
+    --it-soft-neutral: #F4F4F5;
+
+    /* ELIMINAR Y CERRAR SESIÓN */
+    --it-danger: #DC3545;
+    --it-danger-hover: #BB2D3B;
+    --it-danger-text: #B91C1C;
+    --it-danger-soft: #FEE2E2;
+    --it-danger-pale: #FEF2F2;
+    --it-danger-border: #FECACA;
+
+    /* OPERACIONES EXITOSAS */
+    --it-success: #198754;
+    --it-success-text: #166534;
+    --it-success-soft: #DCFCE7;
+    --it-success-pale: #F0FDF4;
+    --it-success-border: #BBF7D0;
+
+    /* ADVERTENCIAS */
+    --it-warning: #A16207;
+    --it-warning-text: #854D0E;
+    --it-warning-soft: #FEFCE8;
+    --it-warning-border: #FDE68A;
+
+    /* BARRA DE DESPLAZAMIENTO */
+    --it-scrollbar: #52525B;
+
+    /* FONDO DEL LOGIN Y REGISTRO */
+    --it-gradient-start: #181818;
+    --it-gradient-middle: #383838;
+    --it-gradient-end: #F97316;
+
+    --it-auth-background: linear-gradient(
+        135deg,
+        var(--it-gradient-start),
+        var(--it-gradient-middle),
+        var(--it-gradient-end)
+    );
+
+    /* TRANSPARENCIAS */
+    --it-light-overlay: rgba(255, 255, 255, 0.12);
+    --it-light-overlay-subtle: rgba(255, 255, 255, 0.08);
+
+    /* EFECTO FOCUS */
+    --it-focus-shadow: rgba(249, 115, 22, 0.18);
+}

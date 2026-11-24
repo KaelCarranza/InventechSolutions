@@ -1,15 +1,17 @@
+@import url("paleta.css");
+
 /* =====================================
    VARIABLES
 ===================================== */
 
 :root {
-    --crud-primary: #173b30;
-    --crud-primary-hover: #245746;
-    --crud-surface: #ffffff;
-    --crud-text: #1e293b;
-    --crud-muted: #64748b;
-    --crud-border: #e2e8f0;
-    --crud-danger: #dc3545;
+    --crud-primary: var(--it-primary);
+    --crud-primary-hover: var(--it-primary-hover);
+    --crud-surface: var(--it-surface);
+    --crud-text: var(--it-text);
+    --crud-muted: var(--it-text-secondary);
+    --crud-border: var(--it-border);
+    --crud-danger: var(--it-danger);
 }
 
 
@@ -65,7 +67,7 @@
     align-items: center;
     justify-content: center;
 
-    background: #e1ede6;
+    background: var(--it-soft);
     color: var(--crud-primary);
 
     border-radius: 11px;
@@ -78,7 +80,7 @@
 ===================================== */
 
 .crud-card .form-label {
-    color: #334155;
+    color: var(--it-text);
     font-size: 14px;
     font-weight: 600;
 
@@ -89,7 +91,7 @@
 .crud-card .form-select {
     min-height: 44px;
 
-    border: 1px solid #dce3e9;
+    border: 1px solid var(--it-border);
     border-radius: 8px;
 
     padding: 10px 12px;
@@ -99,12 +101,12 @@
 
 .crud-card .form-control:focus,
 .crud-card .form-select:focus {
-    border-color: #9bcb9e;
-    box-shadow: 0 0 0 3px rgba(23, 59, 48, 0.08);
+    border-color: var(--it-accent);
+    box-shadow: 0 0 0 3px var(--it-focus-shadow);
 }
 
 .crud-card .form-control::placeholder {
-    color: #94a3b8;
+    color: var(--it-placeholder);
 }
 
 .crud-card textarea {
@@ -123,7 +125,7 @@
 
 .btn-registrar {
     background: var(--crud-primary);
-    color: #ffffff;
+    color: var(--it-surface);
 
     border: none;
     border-radius: 8px;
@@ -139,7 +141,7 @@
 .btn-registrar:hover,
 .btn-registrar:focus {
     background: var(--crud-primary-hover);
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 
@@ -152,9 +154,9 @@
 }
 
 .crud-table thead th {
-    background: #f5f7f9;
+    background: var(--it-background);
 
-    color: #64748b;
+    color: var(--it-text-secondary);
 
     font-size: 11px;
     font-weight: 700;
@@ -171,9 +173,9 @@
 .crud-table tbody td {
     padding: 16px 12px;
 
-    color: #334155;
+    color: var(--it-text);
 
-    border-bottom: 1px solid #edf0f3;
+    border-bottom: 1px solid var(--it-border);
 }
 
 .crud-table tbody tr:last-child td {
@@ -181,7 +183,7 @@
 }
 
 .crud-table {
-    --bs-table-hover-bg: #f8fafc;
+    --bs-table-hover-bg: var(--it-background);
 }
 
 
@@ -197,7 +199,7 @@
 
     padding: 5px;
 
-    background: #ffffff;
+    background: var(--it-surface);
 
     border: 1px solid var(--crud-border);
     border-radius: 10px;
@@ -211,8 +213,8 @@
     align-items: center;
     justify-content: center;
 
-    background: #f1f5f9;
-    color: #94a3b8;
+    background: var(--it-soft-neutral);
+    color: var(--it-placeholder);
 
     border-radius: 10px;
 
@@ -250,13 +252,13 @@
 }
 
 .stock-disponible {
-    background: #dcfce7;
-    color: #166534;
+    background: var(--it-success-soft);
+    color: var(--it-success-text);
 }
 
 .stock-agotado {
-    background: #fee2e2;
-    color: #b91c1c;
+    background: var(--it-danger-soft);
+    color: var(--it-danger-text);
 }
 
 
@@ -293,7 +295,7 @@
     align-items: center;
     justify-content: center;
 
-    background: #e1ede6;
+    background: var(--it-soft);
     color: var(--crud-primary);
 
     border-radius: 9px;
@@ -318,7 +320,7 @@
     align-items: center;
     justify-content: center;
 
-    background: #ffffff;
+    background: var(--it-surface);
 
     border: 1px solid var(--crud-border);
     border-radius: 8px;
@@ -336,13 +338,13 @@
 /* Editar */
 
 .accion-editar {
-    color: #475569;
+    color: var(--it-text-secondary);
 }
 
 .accion-editar:hover {
-    background: #eff6ff;
-    border-color: #bfdbfe;
-    color: #2563eb;
+    background: var(--it-soft);
+    border-color: var(--it-accent);
+    color: var(--it-primary-active);
 }
 
 
@@ -353,13 +355,13 @@
 }
 
 .accion-eliminar:hover {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #b91c1c;
+    background: var(--it-danger-pale);
+    border-color: var(--it-danger-border);
+    color: var(--it-danger-text);
 }
 
 .accion-btn:focus-visible {
-    outline: 3px solid #9bcb9e;
+    outline: 3px solid var(--it-accent);
     outline-offset: 2px;
 }
 
@@ -408,53 +410,63 @@
 /* Botón deshabilitar usuario */
 
 .accion-deshabilitar {
-    color: #d97706;
+    color: var(--it-warning);
 }
 
 .accion-deshabilitar:hover {
-    background: #fff7ed;
-    border-color: #fed7aa;
-    color: #b45309;
+    background: var(--it-warning-soft);
+    border-color: var(--it-warning-border);
+    color: var(--it-warning-text);
 }
 
 
 /* Botón habilitar usuario */
 
 .accion-habilitar {
-    color: #198754;
+    color: var(--it-success);
 }
 
 .accion-habilitar:hover {
-    background: #f0fdf4;
-    border-color: #bbf7d0;
-    color: #166534;
+    background: var(--it-success-pale);
+    border-color: var(--it-success-border);
+    color: var(--it-success-text);
 }
 
 /* Total Productops */
 .resumen-total {
-    background: green;
-    color: #ffffff;
+    background: var(--it-primary);
+    color: var(--it-surface);
 }
 
 /* Stock bajo */
-.resumen-stock-bajo, .resumen-admin  {
-    background: orange;
-    color: #ffffff;
+.resumen-stock-bajo {
+    background: var(--it-warning);
+    color: var(--it-surface);
+}
+
+.resumen-admin {
+    background: var(--it-primary-active);
+    color: var(--it-surface);
 }
 
 /* Productos agotados */
-.resumen-agotados, .resumen-cliente {
-    background: red;
-    color: #ffffff;
+.resumen-agotados {
+    background: var(--it-danger);
+    color: var(--it-surface);
+}
+
+.resumen-cliente {
+    background: var(--it-scrollbar);
+    color: var(--it-surface);
 }
 
 /* SKU del producto */
 
 .sku-producto {
     display: inline-block;
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    background: var(--it-soft-neutral);
+    color: var(--it-text-secondary);
+    border: 1px solid var(--it-border);
     border-radius: 6px;
     padding: 5px 8px;
     font-family: monospace;
@@ -469,8 +481,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--it-background);
+    border: 1px solid var(--it-border);
     border-radius: 12px;
     min-height: 150px;
     padding: 12px;
@@ -509,8 +521,8 @@
     align-items: center;
     justify-content: center;
 
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background-color: var(--it-background);
+    border: 1px solid var(--it-border);
     border-radius: 10px;
 
     padding: 10px;
@@ -527,4 +539,25 @@
 
     object-fit: contain;
     display: block;
+}
+
+
+.btn-registrar {
+    background: var(--it-accent);
+    color: var(--it-primary);
+}
+
+.btn-registrar:hover,
+.btn-registrar:focus {
+    background: var(--it-primary-active);
+    color: var(--it-surface);
+}
+
+.accion-editar {
+    color: var(--it-primary-active);
+}
+
+.resumen-admin {
+    background: var(--it-accent);
+    color: var(--it-primary);
 }

@@ -69,10 +69,10 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
         rel="stylesheet">
 
     <!-- CSS Sidebar -->
-    <link rel="stylesheet" href="../css/sidebar.css?v=1.0">
+    <link rel="stylesheet" href="../css/sidebar.css?v=2.0">
 
     <!-- CSS CRUD -->
-    <link rel="stylesheet" href="../css/crud.css">
+    <link rel="stylesheet" href="../css/crud.css?v=2.0">
 
 </head>
 

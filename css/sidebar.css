@@ -1,15 +1,17 @@
+@import url("paleta.css");
+
 /* ===================================
    VARIABLES
 =================================== */
 
 :root {
     --sidebar-width: 260px;
-    --sidebar-bg: #173b30;
-    --sidebar-hover: #245746;
-    --sidebar-active: #30634f;
-    --sidebar-text: #e5efe9;
-    --sidebar-muted: #9bb7a9;
-    --admin-bg: #f5f7f5;
+    --sidebar-bg: var(--it-primary);
+    --sidebar-hover: var(--it-primary-hover);
+    --sidebar-active: var(--it-primary-active);
+    --sidebar-text: var(--it-header-text);
+    --sidebar-muted: var(--it-header-muted);
+    --admin-bg: var(--it-background);
 }
 
 * {
@@ -62,11 +64,11 @@ body {
     padding: 0 8px 12px;
 
     text-decoration: none;
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 .sidebar-brand:hover {
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 .brand-icon {
@@ -78,7 +80,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--it-light-overlay);
     border-radius: 12px;
 
     font-size: 23px;
@@ -110,7 +112,7 @@ body {
 
 .sidebar-divider {
     height: 1px;
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--it-light-overlay);
 
     margin: 16px 0;
 }
@@ -127,7 +129,7 @@ body {
     overflow-y: auto;
 
     scrollbar-width: thin;
-    scrollbar-color: #44705e transparent;
+    scrollbar-color: var(--it-scrollbar) transparent;
 }
 
 .menu-section {
@@ -184,12 +186,12 @@ body {
     font-size: 16px;
     text-align: center;
 
-    color: #b7cec0;
+    color: var(--it-header-icon);
 }
 
 .menu-link:hover {
     background: var(--sidebar-hover);
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 
@@ -197,7 +199,7 @@ body {
 
 .menu-link.active {
     background: var(--sidebar-active);
-    color: #ffffff;
+    color: var(--it-surface);
 
     font-weight: 600;
 
@@ -206,7 +208,7 @@ body {
 }
 
 .menu-link.active i {
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 
@@ -246,8 +248,8 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: var(--it-light-overlay);
+    color: var(--it-surface);
 
     font-size: 17px;
 }
@@ -260,7 +262,7 @@ body {
 
 .admin-info strong {
     font-size: 13px;
-    color: #ffffff;
+    color: var(--it-surface);
 }
 
 .admin-info small {
@@ -269,7 +271,7 @@ body {
 }
 
 .tienda-link {
-    color: #c6d9ce;
+    color: var(--it-header-icon);
 }
 
 
@@ -302,8 +304,8 @@ body {
 
     padding: 15px 28px;
 
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
+    background: var(--it-surface);
+    border-bottom: 1px solid var(--it-border);
 
     z-index: 1020;
 }
@@ -315,7 +317,7 @@ body {
 }
 
 .topbar-title {
-    color: #64748b;
+    color: var(--it-text-secondary);
     font-size: 14px;
     font-weight: 500;
 }
@@ -326,7 +328,7 @@ body {
     gap: 10px;
 
     font-size: 14px;
-    color: #475569;
+    color: var(--it-text-secondary);
 }
 
 .topbar-user i {
@@ -346,19 +348,19 @@ body {
 .admin-main h1 {
     font-size: 28px;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--it-text);
 
     margin-bottom: 10px;
 }
 
 .admin-description {
     font-size: 14px;
-    color: #64748b;
+    color: var(--it-text-secondary);
 }
 
 .bienvenida-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--it-surface);
+    border: 1px solid var(--it-border);
     border-radius: 14px;
 
     padding: 30px;
@@ -374,8 +376,8 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: #e1ede6;
-    color: #173b30;
+    background: var(--it-soft);
+    color: var(--it-primary);
 
     border-radius: 12px;
     font-size: 24px;
@@ -438,4 +440,18 @@ body {
         display: none;
     }
 
+}
+
+.menu-link.active {
+    background: var(--it-accent);
+    color: var(--it-primary);
+}
+
+.menu-link.active i {
+    color: var(--it-primary);
+}
+
+.brand-icon {
+    background: var(--it-accent);
+    color: var(--it-primary);
 }

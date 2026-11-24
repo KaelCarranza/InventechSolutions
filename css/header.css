@@ -1,14 +1,36 @@
+@import url("paleta.css");
+
+/* ===================================
+   PALETA DE COLORES INVENTECH
+=================================== */
 
 :root {
-    --primary: #173B30;
-    --primary-hover: #245746;
-    --accent: #9BCB9E;
-    --background: #F5F7F5;
-    --surface: #FFFFFF;
-    --text: #263B32;
-    --text-secondary: #7C8981;
-    --border: #E1E7E2;
+    --primary: var(--it-primary);
+    --primary-hover: var(--it-primary-hover);
+    --primary-active: var(--it-primary-active);
+
+    --accent: var(--it-accent);
+
+    --background: var(--it-background);
+    --surface: var(--it-surface);
+
+    --text: var(--it-text);
+    --text-secondary: var(--it-placeholder);
+
+    --header-text: var(--it-header-text);
+    --header-muted: var(--it-header-muted);
+    --header-icon: var(--it-header-icon);
+
+    --border: var(--it-border);
+
+    --danger: var(--it-danger);
+    --danger-hover: var(--it-danger-hover);
 }
+
+
+/* ===================================
+   CONFIGURACIÓN GENERAL
+=================================== */
 
 * {
     margin: 0;
@@ -17,121 +39,416 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+
     background: var(--background);
     color: var(--text);
 }
 
+
+/* ===================================
+   HEADER PRINCIPAL
+=================================== */
+
 .header {
     min-height: 80px;
-    background: var(--surface);
+
+    background: var(--primary);
+    color: var(--header-text);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 14px 5%;
     gap: 25px;
-    border-bottom: 1px solid var(--border);
+
+    border-bottom: 1px solid var(--it-light-overlay);
+
+    box-shadow: 0 3px 12px rgba(23, 59, 48, 0.10);
+
     flex-wrap: wrap;
 }
 
-.marca {
+
+/* ===================================
+   MARCA
+=================================== */
+
+.header .marca {
     display: flex;
     align-items: center;
     gap: 12px;
+
     text-decoration: none;
-    color: var(--primary);
+    color: var(--it-surface);
 }
 
-.logo-icono {
+.header .marca:hover {
+    color: var(--it-surface);
+}
+
+
+/* LOGO */
+
+.header .logo-icono {
     width: 45px;
     height: 45px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 10px;
+    min-width: 45px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+
+    background: var(--it-light-overlay);
+    color: var(--it-surface);
+
+    border-radius: 12px;
+
+    font-size: 23px;
 }
 
-.logo-texto h2 {
+
+/* TEXTO DEL LOGO */
+
+.header .logo-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.header .logo-texto h2 {
     font-size: 21px;
+    font-weight: 700;
+    line-height: 1.1;
+
+    color: var(--it-surface);
+
+    margin: 0;
 }
 
-.logo-texto span {
+.header .logo-texto span {
     font-size: 10px;
     letter-spacing: 3px;
+
+    color: var(--header-muted);
+
+    margin-top: 5px;
 }
 
-.nav {
+
+/* ===================================
+   MENÚ DE NAVEGACIÓN
+=================================== */
+
+.header .nav {
     display: flex;
     align-items: center;
-    gap: 25px;
+
+    gap: 8px;
+
     flex-wrap: wrap;
 }
 
-.nav a {
-    color: var(--text);
+.header .nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 15px;
+
+    color: var(--header-text);
+
     text-decoration: none;
+
     font-size: 14px;
     font-weight: 500;
+
+    border-radius: 8px;
+
+    transition: background 0.2s ease,
+                color 0.2s ease;
 }
 
-.nav a:hover {
-    color: var(--primary-hover);
+.header .nav a:hover {
+    background: var(--primary-hover);
+    color: var(--it-surface);
 }
 
-.nav .nav-admin {
-    color: var(--primary);
-    font-weight: bold;
+
+/* OPCIÓN SELECCIONADA */
+
+.header .nav a.active {
+    background: var(--primary-active);
+    color: var(--it-surface);
+
+    font-weight: 600;
 }
 
-.header-acciones {
+
+/* ICONOS DEL MENÚ */
+
+.header .nav a i {
+    color: var(--header-icon);
+    font-size: 15px;
+}
+
+.header .nav a:hover i,
+.header .nav a.active i {
+    color: var(--it-surface);
+}
+
+
+/* ===================================
+   ENLACE ADMINISTRACIÓN
+=================================== */
+
+.header .nav .nav-admin {
+    background: var(--primary-active);
+    color: var(--it-surface);
+
+    font-weight: 600;
+}
+
+.header .nav .nav-admin:hover {
+    background: var(--primary-hover);
+    color: var(--it-surface);
+}
+
+
+/* ===================================
+   ACCIONES DEL HEADER
+=================================== */
+
+.header .header-acciones {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.carrito-icono {
-    color: var(--primary);
+
+/* ===================================
+   CARRITO DE COMPRAS
+=================================== */
+
+.header .carrito-icono {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--it-light-overlay-subtle);
+    color: var(--header-text);
+
     font-size: 21px;
-}
 
-.btn-login,
-.btn-logout {
     text-decoration: none;
-    padding: 11px 17px;
+
     border-radius: 8px;
+
+    transition: background 0.2s ease,
+                color 0.2s ease;
+}
+
+.header .carrito-icono:hover {
+    background: var(--primary-hover);
+    color: var(--it-surface);
+}
+
+
+/* ===================================
+   BOTONES LOGIN Y LOGOUT
+=================================== */
+
+.header .btn-login,
+.header .btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 17px;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
 }
 
-.btn-login {
-    background: var(--primary);
-    color: white;
+
+/* INICIAR SESIÓN */
+
+.header .btn-login {
+    background: var(--primary-active);
+    color: var(--it-surface);
+
+    border: 1px solid var(--primary-active);
 }
 
-.btn-logout {
-    border: 1px solid var(--border);
+.header .btn-login:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+
     color: var(--primary);
 }
 
-.usuario-rol {
-    font-size: 13px;
-    color: var(--text-secondary);
+
+/* CERRAR SESIÓN */
+
+.header .btn-logout {
+    background: var(--danger);
+    color: var(--it-surface);
+
+    border: 1px solid var(--danger);
 }
+
+.header .btn-logout:hover {
+    background: var(--danger-hover);
+    border-color: var(--danger-hover);
+
+    color: var(--it-surface);
+}
+
+
+/* ===================================
+   INFORMACIÓN DEL USUARIO
+=================================== */
+
+.header .usuario-rol {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: var(--header-muted);
+}
+
+.header .usuario-rol i {
+    font-size: 18px;
+    color: var(--header-text);
+}
+
+
+/* ===================================
+   ACCESIBILIDAD
+=================================== */
+
+.header a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+/* ===================================
+   RESPONSIVE - TABLET
+=================================== */
 
 @media (max-width: 768px) {
+
     .header {
         flex-direction: column;
         align-items: stretch;
+
+        padding: 16px 20px;
+        gap: 18px;
     }
 
-    .nav {
-        gap: 16px;
+    .header .marca {
+        justify-content: center;
     }
 
-    .header-acciones {
-        justify-content: flex-end;
+    .header .nav {
+        justify-content: center;
+        gap: 6px;
     }
+
+    .header .nav a {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .header .header-acciones {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+}
+
+
+/* ===================================
+   RESPONSIVE - CELULAR
+=================================== */
+
+@media (max-width: 480px) {
+
+    .header {
+        padding: 14px;
+    }
+
+    .header .logo-texto h2 {
+        font-size: 19px;
+    }
+
+    .header .logo-icono {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+
+        font-size: 20px;
+    }
+
+    .header .nav {
+        gap: 4px;
+    }
+
+    .header .nav a {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .header .header-acciones {
+        gap: 10px;
+    }
+
+    .header .btn-login,
+    .header .btn-logout {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .header .usuario-rol {
+        font-size: 12px;
+    }
+
+
+    
+}
+
+.btn-login {
+    background: var(--it-accent);
+    border-color: var(--it-accent);
+    color: var(--it-primary);
+}
+
+.btn-login:hover {
+    background: var(--it-primary-active);
+    border-color: var(--it-primary-active);
+    color: var(--it-surface);
+}
+
+.logo-icono {
+    color: var(--it-accent);
 }
