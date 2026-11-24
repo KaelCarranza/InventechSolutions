@@ -373,7 +373,7 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
 
                                             <!-- Categoría -->
                                             <td>
-                                                <span class="badge rounded-pill bg-success-subtle text-success-emphasis">
+                                                <span class="producto-categoria">
                                                     <?= htmlspecialchars($datos->NombreCategoria ?? "Sin categoría") ?>
                                                 </span>
                                             </td>
