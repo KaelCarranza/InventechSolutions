@@ -217,12 +217,6 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
                                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" min="0" placeholder="0.00" required>
                             </div>
 
-                            <!-- Cantidad -->
-                            <div class="mb-3">
-                                <label for="cantidad" class="form-label"> Cantidad </label>
-                                <input type="number" class="form-control" id="cantidad" name="cantidad" min="0" step="1" placeholder="0" required>
-                            </div>
-
                             <!-- Categoria -->
                             <div class="mb-3">
                                 <label for="idCategoria" class="form-label"> Categoría </label>
@@ -286,9 +280,7 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <th>Imagen</th>
                                         <th>Producto</th>
                                         <th>Precio</th>
-                                        <th>Cantidad</th>
                                         <th>Categoria</th>
-                                        <th>Estado</th>
                                         <th>Descripción</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -360,17 +352,6 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
 
                                             </td>
 
-                                            <!-- Cantidad -->
-                                            <td>
-
-                                                <span class="stock-badge <?= $datos->Cantidad > 0 ? 'stock-disponible' : 'stock-agotado' ?>">
-
-                                                    <?= (int) $datos->Cantidad ?>
-
-                                                </span>
-
-                                            </td>
-
                                             <!-- Categoría -->
                                             <td>
                                                 <span class="producto-categoria">
@@ -378,18 +359,6 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
                                                 </span>
                                             </td>
 
-                                            <!-- Estado -->
-                                            <td>
-
-                                                <span class="producto-estado <?= $esActivo ? 'estado-activo' : 'estado-inactivo' ?>">
-
-                                                    <span class="estado-punto"></span>
-
-                                                    <?= $esActivo ? "Activo" : "Inactivo" ?>
-
-                                                </span>
-
-                                            </td>
 
                                             <!-- Descripción -->
                                             <td class="descripcion-producto">
@@ -582,21 +551,6 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
 
                                 </div>
 
-                                <!-- Cantidad -->
-                                <div class="col-12 col-md-6">
-
-                                    <label class="form-label">Cantidad</label>
-
-                                    <input type="number"
-                                        class="form-control"
-                                        name="cantidad"
-                                        min="0"
-                                        step="1"
-                                        value="<?= (int) $datos->Cantidad ?>"
-                                        required>
-
-                                </div>
-
                                 <!-- Categoría -->
                                 <div class="col-12 col-md-6">
 
@@ -622,33 +576,6 @@ $productos = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </option>
 
                                         <?php } ?>
-
-                                    </select>
-
-                                </div>
-
-                                <!-- Estado -->
-                                <div class="col-12 col-md-6">
-
-                                    <label class="form-label">Estado</label>
-
-                                    <select class="form-select"
-                                        name="activo"
-                                        required>
-
-                                        <option value="1"
-                                            <?= (int) $datos->Activo === 1 ? "selected" : "" ?>>
-
-                                            Activo
-
-                                        </option>
-
-                                        <option value="0"
-                                            <?= (int) $datos->Activo === 0 ? "selected" : "" ?>>
-
-                                            Inactivo
-
-                                        </option>
 
                                     </select>
 

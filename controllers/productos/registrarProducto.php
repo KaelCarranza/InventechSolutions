@@ -5,7 +5,6 @@ if (!empty($_POST["btnInsertar"])) {
     $sku = strtoupper(trim($_POST["sku"] ?? ""));
     $producto = trim($_POST["producto"] ?? "");
     $precio = $_POST["precio"] ?? "";
-    $cantidad = $_POST["cantidad"] ?? "";
     $descripcion = trim($_POST["descripcion"] ?? "");
 
     // Recibir categoría
@@ -20,7 +19,6 @@ if (!empty($_POST["btnInsertar"])) {
         $sku === "" ||
         $producto === "" ||
         $precio === "" ||
-        $cantidad === "" ||
         $descripcion === "" ||
         !$idCategoria ||
         $idCategoria < 1
@@ -38,13 +36,11 @@ if (!empty($_POST["btnInsertar"])) {
 
     } elseif (
         !is_numeric($precio) ||
-        (float)$precio < 0 ||
-        filter_var($cantidad, FILTER_VALIDATE_INT) === false ||
-        (int)$cantidad < 0
+        (float)$precio < 0
     ) {
 
         echo '<div class="alert alert-warning">
-                Precio o cantidad inválidos.
+                El precio ingresado es inválido.
               </div>';
 
     } elseif (
@@ -145,7 +141,7 @@ if (!empty($_POST["btnInsertar"])) {
             // Obtener extensión
             $extension = $permitidos[$mime];
 
-            // Generar nombre aleatorio para evitar duplicados
+            // Generar nombre aleatorio
             $nombreImagen = bin2hex(random_bytes(16))
                 . "." . $extension;
 
@@ -174,7 +170,7 @@ if (!empty($_POST["btnInsertar"])) {
 
             }
 
-            // Registrar producto
+            // Registrar producto con stock inicial de 0
             $sql = $conexion->prepare("
                 INSERT INTO productos (
                     SKU,
@@ -191,7 +187,7 @@ if (!empty($_POST["btnInsertar"])) {
                     :sku,
                     :producto,
                     :precio,
-                    :cantidad,
+                    0,
                     :descripcion,
                     :imagen,
                     :idCategoria,
@@ -204,7 +200,6 @@ if (!empty($_POST["btnInsertar"])) {
                 ":sku" => $sku,
                 ":producto" => $producto,
                 ":precio" => $precio,
-                ":cantidad" => $cantidad,
                 ":descripcion" => $descripcion,
                 ":imagen" => $nombreImagen,
                 ":idCategoria" => $idCategoria
@@ -220,6 +215,7 @@ if (!empty($_POST["btnInsertar"])) {
 
             echo '<div class="alert alert-success">
                     Producto registrado correctamente.
+                    Las existencias deben gestionarse desde inventario.
                   </div>';
 
         } catch (PDOException $e) {

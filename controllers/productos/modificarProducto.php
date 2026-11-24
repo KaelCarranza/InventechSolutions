@@ -17,10 +17,10 @@ if (!empty($_POST["btnModificar"])) {
     $sku = strtoupper(trim($_POST["sku"] ?? ""));
     $producto = trim($_POST["producto"] ?? "");
     $precio = $_POST["precio"] ?? "";
-    $cantidad = $_POST["cantidad"] ?? "";
     $descripcion = trim($_POST["descripcion"] ?? "");
     $activo = $_POST["activo"] ?? "";
 
+    // Validar campos obligatorios
     if (
         !$idProducto ||
         $idProducto < 1 ||
@@ -39,13 +39,11 @@ if (!empty($_POST["btnModificar"])) {
     } elseif (
         !is_numeric($precio) ||
         (float) $precio < 0 ||
-        filter_var($cantidad, FILTER_VALIDATE_INT) === false ||
-        (int) $cantidad < 0 ||
         !in_array($activo, ["0", "1"], true)
     ) {
 
         echo '<div class="alert alert-warning">
-                Precio, cantidad o estado inválidos.
+                Precio o estado inválidos.
               </div>';
 
     } else {
@@ -68,9 +66,11 @@ if (!empty($_POST["btnModificar"])) {
             $productoActual = $consulta->fetch(PDO::FETCH_ASSOC);
 
             if (!$productoActual) {
+
                 throw new RuntimeException(
                     "El producto no existe."
                 );
+
             }
 
             // Verificar SKU duplicado
@@ -87,9 +87,11 @@ if (!empty($_POST["btnModificar"])) {
             ]);
 
             if ($verificarSKU->fetch()) {
+
                 throw new RuntimeException(
                     "El SKU ya pertenece a otro producto."
                 );
+
             }
 
             // Verificar categoría
@@ -104,9 +106,11 @@ if (!empty($_POST["btnModificar"])) {
             ]);
 
             if (!$verificarCategoria->fetch()) {
+
                 throw new RuntimeException(
                     "La categoría seleccionada no existe."
                 );
+
             }
 
             // Conservar imagen actual
@@ -125,18 +129,22 @@ if (!empty($_POST["btnModificar"])) {
                 $archivo = $_FILES["imagen"];
 
                 if ($archivo["error"] !== UPLOAD_ERR_OK) {
+
                     throw new RuntimeException(
                         "Error al cargar la imagen."
                     );
+
                 }
 
-                // Máximo 2 MB
+                // Tamaño máximo: 2 MB
                 $maximo = 2 * 1024 * 1024;
 
                 if ($archivo["size"] > $maximo) {
+
                     throw new RuntimeException(
                         "La imagen supera los 2 MB."
                     );
+
                 }
 
                 // Formatos permitidos
@@ -146,32 +154,41 @@ if (!empty($_POST["btnModificar"])) {
                     "image/webp" => "webp"
                 ];
 
+                // Verificar tipo de imagen
                 $finfo = new finfo(FILEINFO_MIME_TYPE);
-
                 $mime = $finfo->file($archivo["tmp_name"]);
 
                 if (!isset($permitidos[$mime])) {
+
                     throw new RuntimeException(
                         "Formato de imagen no permitido."
                     );
+
                 }
 
+                // Verificar que sea una imagen válida
                 if (@getimagesize($archivo["tmp_name"]) === false) {
+
                     throw new RuntimeException(
                         "El archivo no es una imagen válida."
                     );
+
                 }
 
                 // Generar nombre único
                 $nombreImagen = bin2hex(random_bytes(16))
                     . "." . $permitidos[$mime];
 
+                // Crear directorio si no existe
                 if (!is_dir($directorio)) {
+
                     mkdir($directorio, 0755, true);
+
                 }
 
                 $rutaNuevaImagen = $directorio . $nombreImagen;
 
+                // Guardar nueva imagen
                 if (!move_uploaded_file(
                     $archivo["tmp_name"],
                     $rutaNuevaImagen
@@ -184,13 +201,12 @@ if (!empty($_POST["btnModificar"])) {
                 }
             }
 
-            // Actualizar producto
+            // Actualizar producto sin modificar existencias
             $sql = $conexion->prepare("
                 UPDATE productos
                 SET SKU = :sku,
                     Producto = :producto,
                     Precio = :precio,
-                    Cantidad = :cantidad,
                     Descripcion = :descripcion,
                     Imagen = :imagen,
                     idCategoria = :idCategoria,
@@ -202,7 +218,6 @@ if (!empty($_POST["btnModificar"])) {
                 ":sku" => $sku,
                 ":producto" => $producto,
                 ":precio" => $precio,
-                ":cantidad" => $cantidad,
                 ":descripcion" => $descripcion,
                 ":imagen" => $nombreImagen,
                 ":idCategoria" => $idCategoria,
@@ -211,9 +226,11 @@ if (!empty($_POST["btnModificar"])) {
             ]);
 
             if (!$resultado) {
+
                 throw new RuntimeException(
                     "No se pudo modificar el producto."
                 );
+
             }
 
             // Eliminar imagen anterior si se cambió
@@ -229,9 +246,12 @@ if (!empty($_POST["btnModificar"])) {
                 if (is_file($rutaAnterior)) {
 
                     if (!@unlink($rutaAnterior)) {
-                        error_log("No se pudo eliminar la imagen anterior.");
-                    }
 
+                        error_log(
+                            "No se pudo eliminar la imagen anterior."
+                        );
+
+                    }
                 }
             }
 
@@ -246,7 +266,9 @@ if (!empty($_POST["btnModificar"])) {
                 $rutaNuevaImagen !== null &&
                 is_file($rutaNuevaImagen)
             ) {
+
                 unlink($rutaNuevaImagen);
+
             }
 
             error_log($e->getMessage());
@@ -257,15 +279,22 @@ if (!empty($_POST["btnModificar"])) {
 
         } catch (RuntimeException $e) {
 
+            // Eliminar nueva imagen si ocurre algún error
             if (
                 $rutaNuevaImagen !== null &&
                 is_file($rutaNuevaImagen)
             ) {
+
                 unlink($rutaNuevaImagen);
+
             }
 
             echo '<div class="alert alert-warning">'
-                . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8')
+                . htmlspecialchars(
+                    $e->getMessage(),
+                    ENT_QUOTES,
+                    'UTF-8'
+                )
                 . '</div>';
 
         }
