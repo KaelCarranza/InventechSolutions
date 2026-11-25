@@ -1,0 +1,99 @@
+.reporte-fecha {
+    color: var(--it-text-secondary);
+}
+
+.reporte-barras {
+    display: grid;
+    gap: .6rem;
+    max-height: 24rem;
+    overflow-y: auto;
+}
+
+.reporte-barra {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr) minmax(5.5rem, auto);
+    align-items: center;
+    gap: .75rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.reporte-pista {
+    height: .7rem;
+    border-radius: .25rem;
+    background: var(--it-soft-neutral);
+}
+
+.reporte-pista span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--it-primary-active);
+}
+
+.reporte-importes {
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.reporte-reposicion {
+    color: var(--it-primary-active);
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .reporte-barra {
+        grid-template-columns: 1fr 1fr;
+        gap: .25rem .5rem;
+    }
+
+    .reporte-pista {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+}
+
+@media print {
+    .admin-sidebar,
+    .sidebar-overlay,
+    .sidebar-abrir,
+    .admin-topbar,
+    .reporte-controles {
+        display: none !important;
+    }
+
+    body,
+    .admin-content {
+        background: white;
+        color: black;
+        margin: 0;
+    }
+
+    .admin-main {
+        padding: 0;
+    }
+
+    .admin-main .card {
+        box-shadow: none !important;
+        color: black;
+        background: white;
+    }
+
+    .table-responsive,
+    .reporte-barras {
+        overflow: visible;
+        max-height: none;
+    }
+
+    .reporte-pista {
+        print-color-adjust: exact;
+    }
+
+    .reporte-barra,
+    tr {
+        break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+}

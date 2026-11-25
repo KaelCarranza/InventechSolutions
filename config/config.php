@@ -1,6 +1,6 @@
 <?php
 
-// Ruta pública del proyecto en XAMPP
+// Ruta pública en XAMPP
 define("BASE_URL", "/InventechSolutions/");
 
 // Ruta física del proyecto

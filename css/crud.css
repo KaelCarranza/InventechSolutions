@@ -1,0 +1,563 @@
+@import url("paleta.css");
+
+/* Variables */
+
+
+
+:root {
+    --crud-primary: var(--it-primary);
+    --crud-primary-hover: var(--it-primary-hover);
+    --crud-surface: var(--it-surface);
+    --crud-text: var(--it-text);
+    --crud-muted: var(--it-text-secondary);
+    --crud-border: var(--it-border);
+    --crud-danger: var(--it-danger);
+}
+
+
+/* Contenedores */
+
+
+
+.crud-card {
+    background: var(--crud-surface);
+
+    border: 1px solid var(--crud-border);
+    border-radius: 14px;
+
+    padding: 24px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.025);
+}
+
+
+/* Encabezados */
+
+
+
+.crud-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.crud-card-header h5 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--crud-text);
+
+    margin: 0 0 5px;
+}
+
+.crud-card-header p {
+    color: var(--crud-muted);
+    font-size: 13px;
+
+    margin: 0;
+}
+
+.crud-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--it-soft);
+    color: var(--crud-primary);
+
+    border-radius: 11px;
+    font-size: 19px;
+}
+
+
+/* Formularios */
+
+
+
+.crud-card .form-label {
+    color: var(--it-text);
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.crud-card .form-control,
+.crud-card .form-select {
+    min-height: 44px;
+
+    border: 1px solid var(--it-border);
+    border-radius: 8px;
+
+    padding: 10px 12px;
+
+    font-size: 14px;
+}
+
+.crud-card .form-control:focus,
+.crud-card .form-select:focus {
+    border-color: var(--it-accent);
+    box-shadow: 0 0 0 3px var(--it-focus-shadow);
+}
+
+.crud-card .form-control::placeholder {
+    color: var(--it-placeholder);
+}
+
+.crud-card textarea {
+    resize: vertical;
+}
+
+.crud-card .form-text {
+    font-size: 12px;
+    color: var(--crud-muted);
+}
+
+
+/* Botón registrar */
+
+
+
+.btn-registrar {
+    background: var(--crud-primary);
+    color: var(--it-surface);
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 12px 16px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: background 0.2s ease;
+}
+
+.btn-registrar:hover,
+.btn-registrar:focus {
+    background: var(--crud-primary-hover);
+    color: var(--it-surface);
+}
+
+
+/* Tablas */
+
+
+
+.crud-table {
+    font-size: 14px;
+}
+
+.crud-table thead th {
+    background: var(--it-background);
+
+    color: var(--it-text-secondary);
+
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    padding: 15px 12px;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--crud-border);
+}
+
+.crud-table tbody td {
+    padding: 16px 12px;
+
+    color: var(--it-text);
+
+    border-bottom: 1px solid var(--it-border);
+}
+
+.crud-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.crud-table {
+    --bs-table-hover-bg: var(--it-background);
+}
+
+
+/* Imágenes de productos */
+
+
+
+.producto-imagen {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+
+    padding: 5px;
+
+    background: var(--it-surface);
+
+    border: 1px solid var(--crud-border);
+    border-radius: 10px;
+}
+
+.producto-sin-imagen {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--it-soft-neutral);
+    color: var(--it-placeholder);
+
+    border-radius: 10px;
+
+    font-size: 22px;
+}
+
+
+/* Precio */
+
+
+
+.precio-producto {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Cantidad / stock */
+
+
+
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 38px;
+
+    padding: 5px 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stock-disponible {
+    background: var(--it-success-soft);
+    color: var(--it-success-text);
+}
+
+.stock-agotado {
+    background: var(--it-danger-soft);
+    color: var(--it-danger-text);
+}
+
+
+/* Descripciones */
+
+
+
+.descripcion-producto,
+.descripcion-categoria {
+    min-width: 160px;
+    max-width: 260px;
+
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+
+/* Categorías */
+
+
+
+.categoria-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.categoria-icono {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--it-soft);
+    color: var(--crud-primary);
+
+    border-radius: 9px;
+}
+
+
+/* Acciones */
+
+
+
+.crud-acciones {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accion-btn {
+    width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--it-surface);
+
+    border: 1px solid var(--crud-border);
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Editar */
+
+.accion-editar {
+    color: var(--it-text-secondary);
+}
+
+.accion-editar:hover {
+    background: var(--it-soft);
+    border-color: var(--it-accent);
+    color: var(--it-primary-active);
+}
+
+
+/* Eliminar */
+
+.accion-eliminar {
+    color: var(--crud-danger);
+}
+
+.accion-eliminar:hover {
+    background: var(--it-danger-pale);
+    border-color: var(--it-danger-border);
+    color: var(--it-danger-text);
+}
+
+.accion-btn:focus-visible {
+    outline: 3px solid var(--it-accent);
+    outline-offset: 2px;
+}
+
+
+/* Alertas */
+
+
+
+.alert {
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+/* Responsive */
+
+
+
+@media (max-width: 1200px) {
+
+    .crud-card {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .crud-card {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .crud-card-header h5 {
+        font-size: 16px;
+    }
+
+    .crud-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+}
+
+/* Botón deshabilitar usuario */
+
+.accion-deshabilitar {
+    color: var(--it-warning);
+}
+
+.accion-deshabilitar:hover {
+    background: var(--it-warning-soft);
+    border-color: var(--it-warning-border);
+    color: var(--it-warning-text);
+}
+
+
+/* Botón habilitar usuario */
+
+.accion-habilitar {
+    color: var(--it-success);
+}
+
+.accion-habilitar:hover {
+    background: var(--it-success-pale);
+    border-color: var(--it-success-border);
+    color: var(--it-success-text);
+}
+
+/* Total Productops */
+.resumen-total {
+    background: var(--it-primary);
+    color: var(--it-surface);
+}
+
+/* Stock bajo */
+.resumen-stock-bajo {
+    background: var(--it-warning);
+    color: var(--it-surface);
+}
+
+.resumen-admin {
+    background: var(--it-primary-active);
+    color: var(--it-surface);
+}
+
+/* Productos agotados */
+.resumen-agotados {
+    background: var(--it-danger);
+    color: var(--it-surface);
+}
+
+.resumen-cliente {
+    background: var(--it-scrollbar);
+    color: var(--it-surface);
+}
+
+/* SKU del producto */
+
+.sku-producto {
+    display: inline-block;
+    background: var(--it-soft-neutral);
+    color: var(--it-text-secondary);
+    border: 1px solid var(--it-border);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Imagen del modal de edición */
+
+.imagen-editar-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--it-background);
+    border: 1px solid var(--it-border);
+    border-radius: 12px;
+    min-height: 150px;
+    padding: 12px;
+}
+
+.imagen-editar {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+}
+
+/* Modal de productos */
+
+.modal-content {
+    border: none;
+    border-radius: 14px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 20px 24px;
+}
+
+.modal-title {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+/* Contenedor de la imagen actual */
+.imagen-editar-contenedor {
+    width: 100%;
+    height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--it-background);
+    border: 1px solid var(--it-border);
+    border-radius: 10px;
+
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Imagen del producto */
+.imagen-editar-contenedor .imagen-editar {
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 130px;
+
+    object-fit: contain;
+    display: block;
+}
+
+
+.btn-registrar {
+    background: var(--it-accent);
+    color: var(--it-primary);
+}
+
+.btn-registrar:hover,
+.btn-registrar:focus {
+    background: var(--it-primary-active);
+    color: var(--it-surface);
+}
+
+.accion-editar {
+    color: var(--it-primary-active);
+}
+
+.resumen-admin {
+    background: var(--it-accent);
+    color: var(--it-primary);
+}

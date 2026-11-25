@@ -1,10 +1,18 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" &&
-    isset($_POST["btnInsertar"])) {
+if (realpath($_SERVER["SCRIPT_FILENAME"] ?? "") === __FILE__) {
+    http_response_code(404);
+    exit();
+}
 
-    $Nombre = trim($_POST["Nombre"] ?? "");
-    $Descripcion = trim($_POST["Descripcion"] ?? "");
+require_once __DIR__ . "/../bitacora/registrarActividad.php";
+require_once __DIR__ . "/../../config/entrada.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" &&
+    isset($_POST["btnInsertarCategoria"])) {
+
+    $Nombre = textoEntrada($_POST["Nombre"] ?? null);
+    $Descripcion = textoEntrada($_POST["Descripcion"] ?? null);
 
     if ($Nombre === "" || $Descripcion === "") {
 
@@ -23,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" &&
     } else {
 
         try {
+            $conexion->beginTransaction();
 
             $sql = $conexion->prepare(
                 "INSERT INTO categorias (Nombre, Descripcion)
@@ -34,11 +43,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" &&
                 ":descripcion" => $Descripcion
             ]);
 
+            registrarActividad($conexion, "Categorías", "Registro", (int) $conexion->lastInsertId(), "Categoría registrada.");
+            $conexion->commit();
+
             echo '<div class="alert alert-success">
                     Categoría registrada correctamente.
                   </div>';
 
         } catch (PDOException $e) {
+            if ($conexion->inTransaction()) {
+                $conexion->rollBack();
+            }
 
             error_log($e->getMessage());
 

@@ -1,24 +1,22 @@
-
 <?php
+require_once __DIR__ . "/../auth/sesion.php";
 
-require_once __DIR__ . "/../config/config.php";
+iniciarSesionInventech();
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Verificar si existe sesión
 if (!isset($_SESSION["userId"])) {
-
     header("Location: " . BASE_URL . "auth/login.php");
     exit();
 }
 
-// Verificar rol de administrador
-if (($_SESSION["role"] ?? "") !== "Administrador") {
+require_once __DIR__ . "/../config/db.php";
 
-    http_response_code(403);
-
-    exit("Acceso denegado: Se requieren permisos de administrador.");
+try {
+    $rol = rolSesionActual($conexion);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    responderError(503, "No se pudo verificar el acceso. Inténtelo nuevamente.", true);
 }
-?>
+
+if ($rol !== "Administrador") {
+    responderError(403, "No tiene acceso a esta sección. Vuelva al inicio o inicie sesión con una cuenta autorizada.", true);
+}

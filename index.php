@@ -1,7 +1,16 @@
 <?php
-session_start();
+require_once __DIR__ . "/auth/sesion.php";
+iniciarSesionInventech();
 
 require_once "config/db.php";
+
+try {
+    $rol = rolSesionActual($conexion);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    http_response_code(503);
+    exit("No se pudo verificar la sesión.");
+}
 
 // Consultar los productos visibles
 $sql = $conexion->prepare("
@@ -25,6 +34,7 @@ $productos = $sql->fetchAll(PDO::FETCH_ASSOC);
 <html lang="es">
 
 <head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
