@@ -63,7 +63,7 @@ $esAdministrador = (
 
     <div class="header-acciones">
 
-        <a href="carrito.php" class="carrito-icono">
+        <a href="" class="carrito-icono">
             <i class="fa-solid fa-cart-shopping"></i>
         </a>
 
