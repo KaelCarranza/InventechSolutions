@@ -1,29 +1,21 @@
-
 <?php
+require_once __DIR__ . "/../auth/sesion.php";
 
-require_once __DIR__ . "/../config/config.php";
+iniciarSesionInventech();
 
-// Iniciar sesión si todavía no está iniciada
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (isset($_SESSION["userId"])) {
+    require_once __DIR__ . "/../config/db.php";
+    try {
+        if (rolSesionActual($conexion) !== null) {
+            return;
+        }
+    } catch (PDOException $e) {
+        error_log($e->getMessage());
+        http_response_code(503);
+        exit("No se pudo verificar la sesión.");
+    }
 }
 
-// Verificar autenticación
-if (!isset($_SESSION["userId"])) {
-
-    // Guardar el destino solicitado para regresar tras el login.
-    // No aceptamos una URL externa proporcionada por el visitante.
-    $_SESSION["redirect_after_login"] = BASE_URL . "checkout.php";
-
-    header("Location: " . BASE_URL . "auth/login.php");
-    exit();
-}
-
-// Validar que el rol sea uno de los permitidos
-$rolesPermitidos = ["Administrador", "Cliente"];
-
-if (!in_array($_SESSION["role"] ?? "", $rolesPermitidos, true)) {
-    http_response_code(403);
-    exit("Acceso denegado: rol no válido.");
-}
-?>
+// Volver a la tienda tras iniciar sesión
+header("Location: " . BASE_URL . "auth/login.php");
+exit();

@@ -1,51 +1,122 @@
-
 <?php
+
+if (realpath($_SERVER["SCRIPT_FILENAME"] ?? "") === __FILE__) {
+    http_response_code(404);
+    exit();
+}
+
+require_once __DIR__ . "/../bitacora/registrarActividad.php";
+require_once __DIR__ . "/../../config/entrada.php";
 
 if (!empty($_POST["btnInsertar"])) {
 
-    $producto = trim($_POST["producto"] ?? "");
-    $precio = $_POST["precio"] ?? "";
-    $cantidad = $_POST["cantidad"] ?? "";
-    $descripcion = trim($_POST["descripcion"] ?? "");
+    $sku = strtoupper(textoEntrada($_POST["sku"] ?? null));
+    $producto = textoEntrada($_POST["producto"] ?? null);
+    $precio = textoEntrada($_POST["precio"] ?? null);
+    $descripcion = textoEntrada($_POST["descripcion"] ?? null);
 
+
+    $idCategoria = filter_input(
+        INPUT_POST,
+        "idCategoria",
+        FILTER_VALIDATE_INT
+    );
+
+    // Validar datos
     if (
+        $sku === "" ||
         $producto === "" ||
         $precio === "" ||
-        $cantidad === "" ||
-        $descripcion === ""
+        $descripcion === "" ||
+        !$idCategoria ||
+        $idCategoria < 1
     ) {
+
         echo '<div class="alert alert-warning">
                 Todos los campos son obligatorios.
               </div>';
-    } elseif (
-        !is_numeric($precio) ||
-        (float)$precio < 0 ||
-        filter_var($cantidad, FILTER_VALIDATE_INT) === false ||
-        (int)$cantidad < 0
-    ) {
+
+    } elseif (mb_strlen($sku) > 50) {
+
         echo '<div class="alert alert-warning">
-                Precio o cantidad inválidos.
+                El SKU no puede superar los 50 caracteres.
               </div>';
+
+    } elseif (mb_strlen($producto) > 150 || strlen($descripcion) > 65535) {
+        echo '<div class="alert alert-warning">El nombre admite hasta 150 caracteres y la descripción hasta 65 535 bytes.</div>';
+    } elseif (!precioEntradaValido($precio)) {
+
+        echo '<div class="alert alert-warning">
+                Indique un precio entre 0 y 99 999 999,99, con hasta dos decimales y sin notación científica.
+              </div>';
+
     } elseif (
         !isset($_FILES["imagen"]) ||
         $_FILES["imagen"]["error"] !== UPLOAD_ERR_OK
     ) {
+
         echo '<div class="alert alert-warning">
-                Debes seleccionar una imagen válida.
+                Seleccione una imagen JPG, PNG o WEBP de hasta 2 MB.
               </div>';
+
     } else {
 
-        $archivo = $_FILES["imagen"];
+        $rutaDestino = null;
 
-        $maximo = 2 * 1024 * 1024; // 2 MB
+        try {
 
-        if ($archivo["size"] > $maximo) {
+            // Validar SKU
+            $verificarSKU = $conexion->prepare("
+                SELECT idProducto
+                FROM productos
+                WHERE SKU = :sku
+            ");
 
-            echo '<div class="alert alert-danger">
-                    La imagen supera los 2 MB.
-                  </div>';
+            $verificarSKU->execute([
+                ":sku" => $sku
+            ]);
 
-        } else {
+            if ($verificarSKU->fetchColumn()) {
+
+                throw new RuntimeException(
+                    "El SKU ya está registrado."
+                );
+
+            }
+
+
+            $sqlCategoria = $conexion->prepare("
+                SELECT idCategoria
+                FROM categorias
+                WHERE idCategoria = :idCategoria
+            ");
+
+            $sqlCategoria->execute([
+                ":idCategoria" => $idCategoria
+            ]);
+
+            if (!$sqlCategoria->fetchColumn()) {
+
+                throw new RuntimeException(
+                    "La categoría seleccionada no existe."
+                );
+
+            }
+
+
+            $archivo = $_FILES["imagen"];
+
+
+            $maximo = 2 * 1024 * 1024;
+
+            if ($archivo["size"] > $maximo) {
+
+                throw new RuntimeException(
+                    "La imagen supera los 2 MB."
+                );
+
+            }
+
 
             $permitidos = [
                 "image/jpeg" => "jpg",
@@ -53,88 +124,159 @@ if (!empty($_POST["btnInsertar"])) {
                 "image/webp" => "webp"
             ];
 
+
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $mime = $finfo->file($archivo["tmp_name"]);
 
             if (!isset($permitidos[$mime])) {
 
-                echo '<div class="alert alert-danger">
-                        Formato de imagen no permitido.
-                      </div>';
+                throw new RuntimeException(
+                    "Formato de imagen no permitido."
+                );
 
-            } elseif (@getimagesize($archivo["tmp_name"]) === false) {
-
-                echo '<div class="alert alert-danger">
-                        El archivo no es una imagen válida.
-                      </div>';
-
-            } else {
-
-                $extension = $permitidos[$mime];
-
-                // Nombre aleatorio para evitar duplicados
-                $nombreImagen = bin2hex(random_bytes(16))
-                    . "." . $extension;
-
-                // Ruta física absoluta
-                $directorio = dirname(__DIR__, 2)
-                    . "/assets/img/productos/";
-
-                if (!is_dir($directorio)) {
-                    mkdir($directorio, 0755, true);
-                }
-
-                $rutaDestino = $directorio . $nombreImagen;
-
-                if (!move_uploaded_file(
-                    $archivo["tmp_name"],
-                    $rutaDestino
-                )) {
-
-                    echo '<div class="alert alert-danger">
-                            No se pudo guardar la imagen.
-                          </div>';
-
-                } else {
-
-                    try {
-
-                        $sql = $conexion->prepare("
-                            INSERT INTO productos
-                                (Producto, Precio, Cantidad,
-                                 Descripcion, Imagen)
-                            VALUES
-                                (:producto, :precio, :cantidad,
-                                 :descripcion, :imagen)
-                        ");
-
-                        $sql->execute([
-                            ":producto" => $producto,
-                            ":precio" => $precio,
-                            ":cantidad" => $cantidad,
-                            ":descripcion" => $descripcion,
-                            ":imagen" => $nombreImagen
-                        ]);
-
-                        echo '<div class="alert alert-success">
-                                Producto registrado correctamente.
-                              </div>';
-
-                    } catch (PDOException $e) {
-
-                        // Si falla MySQL, borrar la imagen subida
-                        if (is_file($rutaDestino)) {
-                            unlink($rutaDestino);
-                        }
-
-                        error_log($e->getMessage());
-
-                        echo '<div class="alert alert-danger">
-                                Error al registrar el producto.
-                              </div>';
-                    }
-                }
             }
+
+            // Validar la imagen
+            if (@getimagesize($archivo["tmp_name"]) === false) {
+
+                throw new RuntimeException(
+                    "El archivo no es una imagen válida."
+                );
+
+            }
+
+
+            $extension = $permitidos[$mime];
+
+
+            $nombreImagen = bin2hex(random_bytes(16))
+                . "." . $extension;
+
+
+            $directorio = dirname(__DIR__, 2)
+                . "/assets/img/productos/";
+
+
+            if (!is_dir($directorio) && !@mkdir($directorio, 0755, true) && !is_dir($directorio)) {
+                error_log(error_get_last()["message"] ?? "No se pudo crear el directorio de imágenes.");
+                throw new RuntimeException("No se pudo guardar la imagen. Inténtelo nuevamente.");
+            }
+
+            $rutaDestino = $directorio . $nombreImagen;
+
+
+            if (!@move_uploaded_file(
+                $archivo["tmp_name"],
+                $rutaDestino
+            )) {
+
+                error_log(error_get_last()["message"] ?? "No se pudo escribir la imagen.");
+                throw new RuntimeException(
+                    "No se pudo guardar la imagen."
+                );
+
+            }
+
+            // Registrar con stock inicial en cero
+            $sql = $conexion->prepare("
+                INSERT INTO productos (
+                    SKU,
+                    Producto,
+                    Precio,
+                    Cantidad,
+                    Descripcion,
+                    Imagen,
+                    idCategoria,
+                    Activo,
+                    fechaRegistro
+                )
+                VALUES (
+                    :sku,
+                    :producto,
+                    :precio,
+                    0,
+                    :descripcion,
+                    :imagen,
+                    :idCategoria,
+                    1,
+                    NOW()
+                )
+            ");
+
+            $conexion->beginTransaction();
+            $resultado = $sql->execute([
+                ":sku" => $sku,
+                ":producto" => $producto,
+                ":precio" => $precio,
+                ":descripcion" => $descripcion,
+                ":imagen" => $nombreImagen,
+                ":idCategoria" => $idCategoria
+            ]);
+
+            if (!$resultado) {
+
+                throw new RuntimeException(
+                    "No se pudo registrar el producto."
+                );
+
+            }
+
+            registrarActividad($conexion, "Productos", "Registro", (int) $conexion->lastInsertId(), "Producto registrado.");
+            $conexion->commit();
+
+            echo '<div class="alert alert-success">
+                    Producto registrado correctamente.
+                    Las existencias deben gestionarse desde inventario.
+                  </div>';
+
+        } catch (PDOException $e) {
+            if ($conexion->inTransaction()) {
+                $conexion->rollBack();
+            }
+
+            // Retirar la imagen si falla el registro
+            if (
+                $rutaDestino !== null &&
+                is_file($rutaDestino)
+            ) {
+
+                if (!@unlink($rutaDestino)) {
+                    error_log("No se pudo retirar la imagen de una operación rechazada.");
+                }
+
+            }
+
+            error_log($e->getMessage());
+
+            echo '<div class="alert alert-danger">
+                    Error al registrar el producto.
+                  </div>';
+
+        } catch (RuntimeException $e) {
+            if ($conexion->inTransaction()) {
+                $conexion->rollBack();
+            }
+
+
+            if (
+                $rutaDestino !== null &&
+                is_file($rutaDestino)
+            ) {
+
+                if (!@unlink($rutaDestino)) {
+                    error_log("No se pudo retirar la imagen de una operación rechazada.");
+                }
+
+            }
+
+            echo '<div class="alert alert-warning">'
+                . htmlspecialchars(
+                    $e->getMessage(),
+                    ENT_QUOTES,
+                    "UTF-8"
+                )
+                . '</div>';
+
         }
     }
 }

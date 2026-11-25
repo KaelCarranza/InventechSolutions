@@ -1,18 +1,25 @@
 <?php
-session_start();
+require_once __DIR__ . "/sesion.php";
 
-// Eliminar datos de autenticación
-unset(
-    $_SESSION["userId"],
-    $_SESSION["role"],
-    $_SESSION["redirect_after_login"]
-);
+iniciarSesionInventech();
 
-// El carrito se mantiene si existe.
-// Esto permite continuar como visitante.
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Allow: POST");
+    responderError(405, "Para cerrar sesión, abra el inicio y utilice el botón Cerrar sesión.");
+}
 
-session_regenerate_id(true);
+exigirCsrfAutenticacion("logout");
+$_SESSION = [];
+$cookie = session_get_cookie_params();
+setcookie(session_name(), "", [
+    "expires" => time() - 3600,
+    "path" => $cookie["path"],
+    "domain" => $cookie["domain"],
+    "secure" => $cookie["secure"],
+    "httponly" => $cookie["httponly"],
+    "samesite" => $cookie["samesite"]
+]);
+session_destroy();
 
-header("Location: /inventech2/index.php");
+header("Location: " . BASE_URL . "index.php", true, 303);
 exit();
-?>

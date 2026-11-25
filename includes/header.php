@@ -1,9 +1,7 @@
 <?php
 
-// index.php ya inició la sesión.
-$logueado = isset($_SESSION["userId"]);
-
-$rol = $_SESSION["role"] ?? null;
+// Sesión validada en la portada.
+$logueado = $rol !== null;
 
 $esAdministrador = (
     $logueado &&
@@ -69,7 +67,7 @@ $esAdministrador = (
 
         <?php if (!$logueado): ?>
 
-            <a href="/inventech2/auth/login.php" class="btn-login">
+            <a href="<?= BASE_URL ?>auth/login.php" class="btn-login">
                 Iniciar sesión
             </a>
 
@@ -80,9 +78,10 @@ $esAdministrador = (
                 <?= htmlspecialchars($rol) ?>
             </span>
 
-            <a href="/inventech2/auth/logout.php" class="btn-logout">
-                Cerrar sesión
-            </a>
+            <form action="<?= BASE_URL ?>auth/logout.php" method="POST">
+                <input type="hidden" name="csrf_auth" value="<?= tokenAutenticacion("logout") ?>">
+                <button type="submit" class="btn-logout">Cerrar sesión</button>
+            </form>
 
         <?php endif; ?>
 

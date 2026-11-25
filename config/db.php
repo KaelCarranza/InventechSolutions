@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$bd = "tienda_inventech";
+$bd = "tienda_inventech_v2";
 $usuario = "root";
 $password = "";
 
@@ -16,6 +16,8 @@ try {
     );
 
 }catch (PDOException $e) {
-    die("Error de conexion: " . $e->getMessage());
+    error_log($e->getMessage());
+    http_response_code(503);
+    exit("No se pudo conectar con la base de datos. Inténtelo más tarde.");
 }
 ?>

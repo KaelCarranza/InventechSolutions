@@ -1,0 +1,6 @@
+# Archivos locales fuera de la entrega
+/assets/img/productos/demo_*
+/AUDITORIA_ROBUSTEZ.md
+*.log
+*.bak
+*.tmp
