@@ -22,7 +22,7 @@ $menuOperaciones = [
 <aside class="admin-sidebar" id="sidebar">
 
     <!-- Marca -->
-    <a href="index.php" class="sidebar-brand">
+    <a href="usuarios.php" class="sidebar-brand">
 
         <div class="brand-icon">
             <i class="fa-solid fa-cube"></i>
